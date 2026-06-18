@@ -1,20 +1,24 @@
 import { useState } from 'react'
-import { Link } from 'react-router-dom'
+import { useParams, Link } from 'react-router-dom'
 import ClientNavbar from '../components/ClientNavbar'
+import mockAnimals from '../data/mockAnimals'
 
-function Perfil() {
+function FormularioAdocao() {
+  const { id } = useParams()
+  const animal = mockAnimals.find((a) => a.id === Number(id)) || mockAnimals[0]
+
   const [form, setForm] = useState({
     nome: '', email: '', telefone: '', nascimento: '', nif: '',
     localidade: '', concelho: '', distrito: '',
-    novaPassword: '', confirmarPassword: ''
+    temJardim: '', temOutrosAnimais: '', temExperiencia: '', motivo: ''
   })
 
   const handleChange = (e) => setForm({ ...form, [e.target.name]: e.target.value })
 
   const handleSubmit = (e) => {
     e.preventDefault()
-    console.log('Dados a guardar:', form)
-    // Mais tarde: axios.put('/api/users/me', form)
+    console.log('Pedido de adoção:', { animal: animal.name, ...form })
+    // Mais tarde: axios.post('/api/adocoes', { animalId: animal.id, ...form })
   }
 
   return (
@@ -24,26 +28,21 @@ function Perfil() {
       <div className="bg-cream py-4">
         <div className="container">
           <Link to="/area-cliente" className="text-decoration-none text-muted">← Volta à Página Inicial</Link>
-          <h2 className="fw-bold mt-3 mb-0">Editar Perfil</h2>
-          <p className="text-muted">Atualize os seus dados pessoais</p>
+          <h2 className="fw-bold mt-3 mb-0">Formulário de Adoção</h2>
+          <p className="text-muted">Preencha o formulário abaixo para iniciar o processo de adopção. Todos os campos marcados com * são obrigatórios.</p>
         </div>
       </div>
 
       <div className="container py-4">
-        <form onSubmit={handleSubmit}>
-          <div className="card card-pantureco p-4 mb-4">
-            <h6 className="fw-bold mb-3">Fotografia de perfil</h6>
-            <hr />
-            <div className="position-relative" style={{ width: '90px' }}>
-              <div className="avatar-circle" style={{ width: '90px', height: '90px', fontSize: '2rem', borderRadius: '16px' }}>
-                S
-              </div>
-              <button type="button" className="btn btn-gradient position-absolute bottom-0 end-0 p-0 rounded-circle d-flex align-items-center justify-content-center" style={{ width: '30px', height: '30px' }}>
-                ✎
-              </button>
-            </div>
+        <div className="d-flex align-items-center gap-3 p-3 mb-4 rounded-3" style={{ background: 'var(--color-card-green)' }}>
+          <img src={animal.image} alt={animal.name} className="rounded-circle" style={{ width: '48px', height: '48px', objectFit: 'cover' }} />
+          <div>
+            <p className="mb-0 small">A iniciar o processo de adoção de</p>
+            <h5 className="fw-bold mb-0">{animal.name}</h5>
           </div>
+        </div>
 
+        <form onSubmit={handleSubmit}>
           <div className="card card-pantureco p-4 mb-4">
             <h6 className="fw-bold mb-3">Dados Pessoais</h6>
             <hr />
@@ -90,31 +89,36 @@ function Perfil() {
           </div>
 
           <div className="card card-pantureco p-4 mb-4">
-            <h6 className="fw-bold mb-3">Alterar Palavra-Passe</h6>
+            <h6 className="fw-bold mb-3">Sobre o Lar</h6>
             <hr />
-            <div className="row g-3">
-              <div className="col-md-6">
-                <label className="form-label fw-semibold">Nova Palavra-Passe*</label>
-                <input type="password" name="novaPassword" className="form-control" value={form.novaPassword} onChange={handleChange} />
-              </div>
-              <div className="col-md-6">
-                <label className="form-label fw-semibold">Confirmar Nova Palavra-Passe*</label>
-                <input type="password" name="confirmarPassword" className="form-control" value={form.confirmarPassword} onChange={handleChange} />
-              </div>
-            </div>
-          </div>
 
-          <div className="d-flex justify-content-end gap-2 mb-4">
-            <Link to="/area-cliente" className="btn btn-outline-pantureco">Cancelar</Link>
-            <button type="submit" className="btn btn-gradient">Guardar alterações</button>
-          </div>
+            {[
+              { label: 'Tem jardim ou quintal?', name: 'temJardim' },
+              { label: 'Tem outros animais em casa?', name: 'temOutrosAnimais' },
+              { label: 'Tem experiência prévia com animais?', name: 'temExperiencia' }
+            ].map((q) => (
+              <div className="mb-3" key={q.name}>
+                <p className="fw-semibold mb-2">{q.label}</p>
+                <div className="d-flex gap-4">
+                  <label className="d-flex align-items-center gap-2">
+                    <input type="radio" name={q.name} value="Sim" checked={form[q.name] === 'Sim'} onChange={handleChange} /> Sim
+                  </label>
+                  <label className="d-flex align-items-center gap-2">
+                    <input type="radio" name={q.name} value="Não" checked={form[q.name] === 'Não'} onChange={handleChange} /> Não
+                  </label>
+                </div>
+              </div>
+            ))}
 
-          <div className="card card-pantureco p-4 mb-4 d-flex flex-column flex-md-row justify-content-between align-items-md-center gap-3">
             <div>
-              <h6 className="fw-bold mb-1">Eliminar Conta</h6>
-              <p className="text-muted small mb-0">Esta ação é irreversível. Todos os seus dados serão apagados permanentemente.</p>
+              <label className="form-label fw-semibold">Por que razão deseja adotar?</label>
+              <textarea name="motivo" className="form-control" rows="4" value={form.motivo} onChange={handleChange}></textarea>
             </div>
-            <button type="button" className="btn btn-outline-danger-pill">Eliminar conta</button>
+          </div>
+
+          <div className="d-flex justify-content-end gap-2 mb-5">
+            <Link to="/area-cliente" className="btn btn-outline-pantureco">Cancelar</Link>
+            <button type="submit" className="btn btn-gradient">Submeter Pedido</button>
           </div>
         </form>
       </div>
@@ -122,4 +126,4 @@ function Perfil() {
   )
 }
 
-export default Perfil
+export default FormularioAdocao                                         
