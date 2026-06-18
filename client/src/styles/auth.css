@@ -1,14 +1,15 @@
 /* ── Auth pages (Login / Criar Conta) ── */
 .auth-page {
     display: flex;
-    min-height: calc(100vh - 72px);
+    height: calc(100vh - 72px);
     background: #FAF6E8;
-    /* subtract navbar */
+    overflow: hidden;
 }
 
 .auth-image-col {
-    flex: 0 0 42%;
+    flex: 0 0 52%;
     padding: 24px 0 24px 24px;
+    height: 100%;
 }
 
 .auth-image {
@@ -32,8 +33,8 @@
 }
 
 .auth-title {
-    font-size: 2.2rem;
-    font-weight: 800;
+    font-size: 2rem;
+    font-weight: 700;
     color: #1a1a1a;
     margin-bottom: 2rem;
     text-align: center;
@@ -90,8 +91,12 @@
 
 .auth-switch {
     text-align: center;
-    font-size: 0.95rem;
+    font-size: 0.85rem;
     color: #374151;
+}
+
+.auth-switch.mt-5 {
+    margin-top: 1rem !important;
 }
 
 /* Responsive auth */
