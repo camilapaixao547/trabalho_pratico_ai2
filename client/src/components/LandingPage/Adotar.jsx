@@ -11,7 +11,7 @@ function Adotar() {
                     {[
                         {
                             num: '01',
-                            title: 'Escolha seu Amigo',
+                            title: 'Escolha o seu Amigo',
                             desc: 'Navegue pelos nossos anúncios e conheça os animais disponíveis para adoção. Veja fotos, características e histórias.',
                         },
                         {

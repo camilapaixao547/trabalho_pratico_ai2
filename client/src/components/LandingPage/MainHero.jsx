@@ -1,6 +1,8 @@
 import { Link } from 'react-router-dom'
+import { ArrowRight } from 'lucide-react'
 import heroImg from '../../assets/images/hero.jpg'
 import './MainHero.css'
+
 
 function MainHero() {
     return (
@@ -16,7 +18,7 @@ function MainHero() {
                             Adota com segurança, confiança e amor. Entra na plataforma e encontra o teu companheiro de vida.
                         </p>
                         <Link to="/login" className="btn btn-pantureco btn-lg">
-                            Começar →
+                            Entrar <ArrowRight size={20} className="ms-2" />
                         </Link>
                     </div>
                     <div className="col-lg-6">

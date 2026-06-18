@@ -5,4 +5,5 @@
 @import './styles/auth.css';
 @import './styles/avatar.css';
 @import './styles/steps.css';
-@import './styles/cards.css'
+@import './styles/cards.css';
+@import './styles/global.css';

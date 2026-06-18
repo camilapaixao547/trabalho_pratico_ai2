@@ -23,7 +23,6 @@ function Testemunhos() {
                                         <div className="fw-bold small">Maria Silva</div>
                                         <div className="text-muted" style={{ fontSize: '12px' }}>Adotou a Luna</div>
                                     </div>
-                                    <div className="ms-auto text-warning small">★★★★★</div>
                                 </div>
                             </div>
                         </div>
@@ -41,7 +40,6 @@ function Testemunhos() {
                                         <div className="fw-bold small">João Santos</div>
                                         <div className="text-muted" style={{ fontSize: '12px' }}>Adotou o Max</div>
                                     </div>
-                                    <div className="ms-auto text-warning small">★★★★★</div>
                                 </div>
                             </div>
                         </div>
@@ -61,7 +59,6 @@ function Testemunhos() {
                                         <div className="fw-bold small">Ana Costa</div>
                                         <div className="text-muted" style={{ fontSize: '12px' }}>Adotou a Mia</div>
                                     </div>
-                                    <div className="ms-auto text-warning small">★★★★★</div>
                                 </div>
                             </div>
                         </div>
