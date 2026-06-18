@@ -1,0 +1,110 @@
+/* ── Auth pages (Login / Criar Conta) ── */
+.auth-page {
+    display: flex;
+    min-height: calc(100vh - 72px);
+    /* subtract navbar */
+}
+
+.auth-image-col {
+    flex: 0 0 42%;
+    padding: 24px 0 24px 24px;
+}
+
+.auth-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 20px;
+}
+
+.auth-form-col {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 48px 40px;
+}
+
+.auth-form-inner {
+    width: 100%;
+    max-width: 360px;
+}
+
+.auth-title {
+    font-size: 2.2rem;
+    font-weight: 800;
+    color: #1a1a1a;
+    margin-bottom: 2rem;
+    text-align: center;
+}
+
+.auth-label {
+    display: block;
+    font-size: 0.9rem;
+    color: #6b7280;
+    margin-bottom: 6px;
+}
+
+.auth-input {
+    width: 100%;
+    padding: 12px 14px;
+    border: 1.5px solid #e5e7eb;
+    border-radius: 10px;
+    font-size: 1rem;
+    outline: none;
+    transition: border-color 0.2s ease;
+    background: #fff;
+}
+
+.auth-input:focus {
+    border-color: var(--color-green);
+}
+
+.btn-auth {
+    display: block;
+    width: 100%;
+    padding: 14px;
+    border: none;
+    border-radius: 12px;
+    font-size: 1rem;
+    font-weight: 700;
+    color: #fff;
+    cursor: pointer;
+    background: linear-gradient(90deg, var(--color-green) 0%, var(--color-gold) 100%);
+    transition: opacity 0.2s ease;
+}
+
+.btn-auth:hover {
+    opacity: 0.9;
+}
+
+.auth-link {
+    color: var(--color-green);
+    text-decoration: none;
+}
+
+.auth-link:hover {
+    text-decoration: underline;
+}
+
+.auth-switch {
+    text-align: center;
+    font-size: 0.95rem;
+    color: #374151;
+}
+
+/* Responsive auth */
+@media (max-width: 768px) {
+    .auth-page {
+        flex-direction: column;
+    }
+
+    .auth-image-col {
+        flex: 0 0 260px;
+        padding: 16px;
+    }
+
+    .auth-form-col {
+        padding: 32px 20px;
+    }
+}

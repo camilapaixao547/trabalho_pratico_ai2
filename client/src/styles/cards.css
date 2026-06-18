@@ -1,0 +1,33 @@
+/* ── Value cards ── */
+.value-card {
+    border: none;
+    text-align: left;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.value-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+}
+
+.value-card.card-green {
+    background-color: var(--color-card-green);
+}
+
+.value-card.card-lime {
+    background-color: var(--color-card-lime);
+}
+
+.value-card.card-orange {
+    background-color: var(--color-card-orange);
+}
+
+.value-icon {
+    width: 48px;
+    height: 48px;
+    background: rgba(255, 255, 255, 0.7);
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}

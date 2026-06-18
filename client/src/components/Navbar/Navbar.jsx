@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom'
-import logo from '../assets/images/logoPantureco.png'
+import logo from '../../assets/images/logoPantureco.png'
+import './Navbar.css'
 
 function Navbar() {
   return (

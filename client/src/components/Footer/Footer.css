@@ -1,0 +1,12 @@
+/* ── Footer ── */
+.footer-section {
+    background-color: #1a1a1a !important;
+}
+
+.footer-link {
+    transition: color 0.2s ease;
+}
+
+.footer-link:hover {
+    color: var(--color-green) !important;
+}

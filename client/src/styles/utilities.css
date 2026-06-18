@@ -1,0 +1,10 @@
+.bg-cream {
+    background-color: var(--color-cream);
+}
+
+.text-gradient {
+    background: linear-gradient(90deg, var(--color-green), var(--color-gold));
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+}

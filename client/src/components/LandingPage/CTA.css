@@ -1,0 +1,29 @@
+.cta-section {
+    background: linear-gradient(135deg, var(--color-green) 0%, var(--color-gold) 100%);
+}
+
+.cta-title {
+    font-size: 2rem;
+    font-weight: 700;
+}
+
+.btn-cta {
+    background-color: #fff;
+    color: var(--color-green);
+    border: none;
+    border-radius: 50px;
+    padding: 12px 32px;
+    font-weight: 700;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.btn-cta:hover {
+    background-color: var(--color-cream);
+    color: var(--color-green-dark);
+}
+
+@media (max-width: 768px) {
+    .cta-title {
+        font-size: 1.5rem;
+    }
+}

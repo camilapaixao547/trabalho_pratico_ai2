@@ -1,0 +1,18 @@
+.testimonial-card {
+    background: #fff;
+    border: 1px solid #f0f0f0;
+    transition: transform 0.2s ease;
+}
+
+.testimonial-card:hover {
+    transform: translateY(-4px);
+}
+
+.testimonial-img {
+    height: 200px;
+    object-fit: cover;
+}
+
+.testimonial-img-placeholder {
+    height: 200px;
+}
