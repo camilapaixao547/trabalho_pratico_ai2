@@ -1,5 +1,5 @@
 const router = require('express').Router()
-const { listarFormularios, buscarFormularioPorId, criarFormulario, editarFormulario, apagarFormulario, marcarComoLido } = require('../controllers/formularioController')
+const { listarFormularios, buscarFormularioPorId, criarFormulario, editarFormulario, apagarFormulario, marcarComoLido, listarMeusFormularios } = require('../controllers/formularioController')
 const verificarToken = require('../middleware/auth')
 
 router.get('/', listarFormularios)
