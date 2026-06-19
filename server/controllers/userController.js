@@ -72,4 +72,48 @@ const apagarUser = async (req, res) => {
     }
 }
 
-module.exports = { listarUsers, buscarUserPorId, criarUser, editarUser, apagarUser }
+const verMeuPerfil = async (req, res) => {
+    try {
+        const user = await User.findByPk(req.user.id, {
+            attributes: { exclude: ['password_cliente'] }
+        })
+        if (!user) return res.status(404).json({ erro: 'Utilizador não encontrado.' })
+        res.json(user)
+    } catch (err) {
+        res.status(500).json({ erro: 'Erro ao buscar perfil.' })
+    }
+}
+
+const editarMeuPerfil = async (req, res) => {
+    try {
+        const user = await User.findByPk(req.user.id)
+        if (!user) return res.status(404).json({ erro: 'Utilizador não encontrado.' })
+
+        if (req.body.password_cliente) {
+            req.body.password_cliente = await bcrypt.hash(req.body.password_cliente, 10)
+        }
+
+        await user.update(req.body)
+        const { password_cliente, ...userSemPassword } = user.toJSON()
+        res.json(userSemPassword)
+    } catch (err) {
+        res.status(500).json({ erro: 'Erro ao editar perfil.' })
+    }
+}
+
+const apagarMinhaConta = async (req, res) => {
+    try {
+        const user = await User.findByPk(req.user.id)
+        if (!user) return res.status(404).json({ erro: 'Utilizador não encontrado.' })
+
+        await Formulario.destroy({ where: { id_user: req.user.id } })
+        await Favorito.destroy({ where: { id_user: req.user.id } })
+
+        await user.destroy()
+        res.json({ mensagem: 'Conta eliminada com sucesso.' })
+    } catch (err) {
+        res.status(500).json({ erro: 'Erro ao eliminar conta.' })
+    }
+}
+
+module.exports = { listarUsers, buscarUserPorId, criarUser, editarUser, apagarUser, verMeuPerfil, editarMeuPerfil, apagarMinhaConta }
