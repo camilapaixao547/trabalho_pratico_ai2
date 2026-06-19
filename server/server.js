@@ -1,5 +1,5 @@
 require('dotenv').config()
-
+const path = require('path')
 const express = require('express')
 const cors = require('cors')
 const fs = require('fs')
@@ -33,6 +33,14 @@ app.use('/api/formularios', formularioRoutes)
 app.use('/api/users', userRoutes)
 app.use('/api/favoritos', favoritoRoutes)
 app.use('/api/upload', uploadRoutes)
+
+
+
+// depois de todas as rotas app.use('/api/...')
+app.use(express.static(path.join(__dirname, '../client/dist')))
+app.get('*', (req, res) => {
+    res.sendFile(path.join(__dirname, '../client/dist', 'index.html'))
+})
 
 // Liga à base de dados e inicia o servidor
 sequelize.authenticate()
