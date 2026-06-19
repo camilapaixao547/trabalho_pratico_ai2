@@ -1,49 +1,55 @@
-import { useState } from "react";
-import { useNavigate } from "react-router-dom";
-import { useAnuncios } from "../../context/AnunciosContext";
-import "./Anuncios.css";
+import { useState } from 'react'
+import { useNavigate } from 'react-router-dom'
+import { useAnuncios } from '../../context/AnunciosContext'
+import { Mars, Venus } from 'lucide-react'
+import './Anuncios.css'
 
 const filtros = [
-  { label: "Todos", value: "todos" },
-  { label: "Cães", value: "Cão" },
-  { label: "Gatos", value: "Gato" },
-  { label: "Fêmea", value: "Femea" },
-  { label: "Macho", value: "Macho" },
-];
+  { label: 'Todos', value: 'todos' },
+  { label: 'Cães', value: 'cão' },
+  { label: 'Gatos', value: 'gato' },
+  { label: 'Fêmea', value: 'fêmea' },
+  { label: 'Macho', value: 'macho' },
+]
 
 function Anuncios() {
-  const navigate = useNavigate();
+  const navigate = useNavigate()
+  const { anunciosAtivos, eliminarAnuncio, loading } = useAnuncios()
 
-  // Agora vem do contexto real
-  const { anunciosAtivos, eliminarAnuncio } = useAnuncios();
+  const [search, setSearch] = useState('')
+  const [filtroAtivo, setFiltroAtivo] = useState('todos')
+  const [anuncioParaEliminar, setAnuncioParaEliminar] = useState(null)
+  const [mostrarSucesso, setMostrarSucesso] = useState(false)
 
-  const [search, setSearch] = useState("");
-  const [filtroAtivo, setFiltroAtivo] = useState("todos");
-  const [anuncioParaEliminar, setAnuncioParaEliminar] = useState(null);
-  const [mostrarSucesso, setMostrarSucesso] = useState(false);
+  const filtrados = anunciosAtivos
+    .filter(a => {
+      const correspondeFiltro =
+        filtroAtivo === 'todos' ||
+        a.especie_animal === filtroAtivo ||
+        a.genero_animal === filtroAtivo
 
-  // Filtragem
-  const filtrados = anunciosAtivos.filter((a) => {
-    const correspondeFiltro =
-      filtroAtivo === "todos" ||
-      a.especie === filtroAtivo ||
-      a.genero === filtroAtivo;
+      const correspondeBusca = a.nome_animal
+        .toLowerCase()
+        .includes(search.toLowerCase())
 
-    const correspondeBusca = a.nome
-      .toLowerCase()
-      .includes(search.toLowerCase());
+      return correspondeFiltro && correspondeBusca
+    })
+    // Mais recente primeiro: usa createdAt se existir, caso contrário cai para o id (auto-incremento)
+    .sort((a, b) => {
+      if (a.createdAt && b.createdAt) {
+        return new Date(b.createdAt) - new Date(a.createdAt)
+      }
+      return b.id - a.id
+    })
 
-    return correspondeFiltro && correspondeBusca;
-  });
+  const confirmarEliminar = async () => {
+    await eliminarAnuncio(anuncioParaEliminar.id)
+    setAnuncioParaEliminar(null)
+    setMostrarSucesso(true)
+    setTimeout(() => setMostrarSucesso(false), 2500)
+  }
 
-  // Eliminar anúncio
-  const confirmarEliminar = () => {
-    eliminarAnuncio(anuncioParaEliminar.id);
-    setAnuncioParaEliminar(null);
-
-    setMostrarSucesso(true);
-    setTimeout(() => setMostrarSucesso(false), 2500);
-  };
+  if (loading) return <p className="text-muted p-4">A carregar anúncios...</p>
 
   return (
     <div className="anun-wrapper">
@@ -51,13 +57,10 @@ function Anuncios() {
 
       {/* FILTROS */}
       <div className="d-flex gap-2 mb-3 flex-wrap">
-        {filtros.map((f) => (
+        {filtros.map(f => (
           <button
             key={f.value}
-            className={
-              "anun-filtro-btn" +
-              (filtroAtivo === f.value ? " anun-filtro-ativo" : "")
-            }
+            className={'anun-filtro-btn' + (filtroAtivo === f.value ? ' anun-filtro-ativo' : '')}
             onClick={() => setFiltroAtivo(f.value)}
           >
             {f.label}
@@ -74,13 +77,13 @@ function Anuncios() {
               className="form-control anun-search-input"
               placeholder="Search"
               value={search}
-              onChange={(e) => setSearch(e.target.value)}
+              onChange={e => setSearch(e.target.value)}
             />
           </div>
 
           <button
             className="btn anun-btn-primary"
-            onClick={() => navigate("/backoffice/anuncios/criar")}
+            onClick={() => navigate('/backoffice/anuncios/criar')}
           >
             + Adicionar Anúncio
           </button>
@@ -94,30 +97,45 @@ function Anuncios() {
               <th>Nome</th>
               <th>Idade</th>
               <th>Espécie</th>
+              <th>Género</th>
               <th></th>
             </tr>
           </thead>
-
           <tbody>
-            {filtrados.map((a) => (
+            {filtrados.map(a => (
               <tr key={a.id}>
                 <td>
-                  <img src={a.imagem} alt={a.nome} className="anun-thumb" />
+                  <img src={a.fotografia_animal} alt={a.nome_animal} className="anun-thumb" />
                 </td>
-                <td className="fw-semibold">{a.nome}</td>
-                <td>{a.idade}</td>
-                <td>{a.especie}</td>
-
+                <td className="fw-semibold">{a.nome_animal}</td>
+                <td>
+                  {a.idade_indefinida_animal
+                    ? 'Idade desconhecida'
+                    : `${a.idade_valor_animal} ${a.idade_unidade_animal}`}
+                </td>
+                <td>{a.especie_animal}</td>
+                <td>
+                  {a.genero_animal === 'macho' ? (
+                    <span className="anun-genero anun-genero-macho">
+                      <Mars size={16} strokeWidth={2.5} />
+                      Macho
+                    </span>
+                  ) : a.genero_animal === 'fêmea' ? (
+                    <span className="anun-genero anun-genero-femea">
+                      <Venus size={16} strokeWidth={2.5} />
+                      Fêmea
+                    </span>
+                  ) : (
+                    <span className="text-muted">—</span>
+                  )}
+                </td>
                 <td className="text-end">
                   <button
                     className="anun-btn-editar me-2"
-                    onClick={() =>
-                      navigate(`/backoffice/anuncios/editar/${a.id}`)
-                    }
+                    onClick={() => navigate(`/backoffice/anuncios/editar/${a.id}`)}
                   >
                     Editar
                   </button>
-
                   <button
                     className="anun-btn-eliminar"
                     onClick={() => setAnuncioParaEliminar(a)}
@@ -130,7 +148,7 @@ function Anuncios() {
 
             {filtrados.length === 0 && (
               <tr>
-                <td colSpan={5} className="text-center text-muted py-4">
+                <td colSpan={6} className="text-center text-muted py-4">
                   Nenhum anúncio encontrado.
                 </td>
               </tr>
@@ -144,10 +162,9 @@ function Anuncios() {
         <div className="anun-modal-backdrop">
           <div className="anun-modal">
             <p className="anun-modal-text">
-              Tem a certeza que deseja eliminar{" "}
-              <strong>{anuncioParaEliminar.nome}</strong>?
+              Tem a certeza que deseja eliminar{' '}
+              <strong>{anuncioParaEliminar.nome_animal}</strong>?
             </p>
-
             <div className="d-flex justify-content-center gap-2 mt-4">
               <button
                 className="anun-btn-cancelar"
@@ -155,7 +172,6 @@ function Anuncios() {
               >
                 Cancelar
               </button>
-
               <button
                 className="anun-btn-confirmar"
                 onClick={confirmarEliminar}
@@ -172,7 +188,7 @@ function Anuncios() {
         <div className="anun-toast">Eliminado com sucesso!</div>
       )}
     </div>
-  );
+  )
 }
 
-export default Anuncios;
+export default Anuncios

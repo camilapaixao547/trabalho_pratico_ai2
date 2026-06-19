@@ -1,5 +1,11 @@
-.adoc-wrapper { padding-bottom: 40px; }
-.adoc-title { font-weight: 800; margin-bottom: 24px; }
+.adoc-wrapper {
+  padding-bottom: 40px;
+}
+
+.adoc-title {
+  font-weight: 800;
+  margin-bottom: 24px;
+}
 
 .adoc-filtro-btn {
   background: #fff;
@@ -10,27 +16,75 @@
   font-weight: 500;
   font-size: 0.9rem;
 }
-.adoc-filtro-ativo { background-color: #2ecc71; color: #fff; }
 
-.adoc-panel { background-color: #fff; border-radius: 12px; padding: 24px; }
+.adoc-filtro-ativo {
+  background-color: #2ecc71;
+  color: #fff;
+}
 
-.adoc-search { position: relative; max-width: 320px; }
-.adoc-search-input { padding-left: 36px; border-radius: 8px; border: 1px solid #ddd; }
+.adoc-panel {
+  background-color: #fff;
+  border-radius: 12px;
+  padding: 24px;
+}
+
+.adoc-search {
+  position: relative;
+  max-width: 320px;
+}
+
+.adoc-search-input {
+  padding-left: 36px;
+  border-radius: 8px;
+  border: 1px solid #ddd;
+}
+
 .adoc-search-icon {
-  position: absolute; left: 12px; top: 50%;
-  transform: translateY(-50%); color: #999;
+  position: absolute;
+  left: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #999;
 }
 
 .adoc-table thead th {
-  color: #999; font-weight: 500; font-size: 0.85rem;
-  border-bottom: 1px solid #eee; padding-bottom: 10px;
-}
-.adoc-table tbody td {
-  padding: 14px 8px; vertical-align: middle;
-  border-bottom: 1px solid #f5f5f5; font-size: 0.92rem;
+  color: #999;
+  font-weight: 500;
+  font-size: 0.85rem;
+  border-bottom: 1px solid #eee;
+  padding-bottom: 10px;
 }
 
-.adoc-thumb { width: 90px; height: 60px; object-fit: cover; border-radius: 8px; }
+.adoc-table tbody td {
+  padding: 14px 8px;
+  vertical-align: middle;
+  border-bottom: 1px solid #f5f5f5;
+  font-size: 0.92rem;
+}
+
+.adoc-thumb {
+  width: 90px;
+  height: 60px;
+  object-fit: cover;
+  border-radius: 8px;
+}
+
+/* GÉNERO */
+.adoc-genero {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-weight: 500;
+  font-size: 0.85rem;
+}
+
+.adoc-genero-macho {
+  color: #2d7dd2;
+}
+
+.adoc-genero-femea {
+  color: #e0529c;
+}
 
 .adoc-btn-ver-mais {
   background-color: #eaf9ef;

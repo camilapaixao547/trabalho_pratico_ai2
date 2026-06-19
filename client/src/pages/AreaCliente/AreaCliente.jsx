@@ -1,34 +1,34 @@
 import { useState, useEffect } from 'react'
+import axios from 'axios'
 import FilterPills from '../../components/FilterPills'
 import AnimalCard from '../../components/AnimalCard'
-import mockAnimals from '../../data/mockAnimals'
 
 function AreaCliente() {
+  const nome = localStorage.getItem('nome') || 'Utilizador'
   const [animals, setAnimals] = useState([])
   const [filter, setFilter] = useState('Todos')
 
   useEffect(() => {
-    // Mais tarde: axios.get('/api/animals').then(res => setAnimals(res.data))
-    setAnimals(mockAnimals)
+    axios.get('http://localhost:5000/api/animais')
+      .then(res => setAnimals(res.data))
+      .catch(err => console.error('Erro ao carregar animais:', err))
   }, [])
 
   const filteredAnimals = animals.filter((animal) => {
     if (filter === 'Todos') return true
-    if (filter === 'Cães') return animal.species === 'Cão'
-    if (filter === 'Gatos') return animal.species === 'Gato'
-    if (filter === 'Femêa') return animal.gender === 'Femêa'
-    if (filter === 'Macho') return animal.gender === 'Macho'
+    if (filter === 'Cães') return animal.especie_animal === 'cão'
+    if (filter === 'Gatos') return animal.especie_animal === 'gato'
+    if (filter === 'Fêmea') return animal.genero_animal === 'fêmea'
+    if (filter === 'Macho') return animal.genero_animal === 'macho'
     return true
   })
 
   return (
     <>
-
       <div className="bg-cream py-5">
         <div className="container">
           <h1 className="fw-bold mb-0">Bem-vindo,</h1>
-          <h1 className="fw-bold text-gradient">Sónia Santos</h1>
-
+          <h1 className="fw-bold text-gradient">{nome}</h1>
         </div>
       </div>
 

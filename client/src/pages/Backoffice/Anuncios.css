@@ -98,6 +98,23 @@
   font-weight: 500;
 }
 
+/* GÉNERO */
+.anun-genero {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-weight: 500;
+  font-size: 0.85rem;
+}
+
+.anun-genero-macho {
+  color: #2d7dd2;
+}
+
+.anun-genero-femea {
+  color: #e0529c;
+}
+
 /* MODAL */
 .anun-modal-backdrop {
   position: fixed;
@@ -150,6 +167,13 @@
 }
 
 @keyframes fadein {
-  from { opacity: 0; transform: translateY(10px); }
-  to { opacity: 1; transform: translateY(0); }
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }

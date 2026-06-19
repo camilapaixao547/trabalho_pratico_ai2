@@ -34,6 +34,7 @@
 }
 
 .afor-avatar {
+  position: relative;
   width: 120px;
   height: 120px;
   border-radius: 12px;
@@ -43,10 +44,24 @@
   align-items: center;
   justify-content: center;
   cursor: pointer;
+  overflow: hidden;
 }
 
 .afor-paw-icon {
   font-size: 2.2rem;
+}
+
+.afor-avatar-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.55);
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.8rem;
+  font-weight: 600;
+  border-radius: 12px;
 }
 
 .afor-avatar-edit {
@@ -63,6 +78,11 @@
   align-items: center;
   justify-content: center;
   font-size: 0.8rem;
+}
+
+.afor-avatar-edit:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
 }
 
 .afor-label {
@@ -119,4 +139,10 @@
   border-radius: 20px;
   padding: 8px 28px;
   font-weight: 500;
+}
+
+.afor-btn-guardar:disabled,
+.afor-btn-cancelar:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
 }

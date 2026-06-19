@@ -18,6 +18,7 @@ function Login() {
       const resposta = await api.post('/auth/login', { email_cliente: email, password_cliente: password })
       localStorage.setItem('token', resposta.data.token)
       localStorage.setItem('perfil', resposta.data.perfil)
+      localStorage.setItem('nome', resposta.data.nome)
       if (resposta.data.perfil === 'admin') {
         navigate('/backoffice')
       } else {

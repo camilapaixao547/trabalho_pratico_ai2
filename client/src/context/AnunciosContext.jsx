@@ -1,56 +1,69 @@
-// context/AnunciosContext.jsx
-import { createContext, useContext, useState } from "react";
+import { createContext, useContext, useState, useEffect } from 'react'
+import api from '../api/axios'
 
-const AnunciosContext = createContext();
-
-const mockAnuncios = [
-  { id: 1, nome: "Mia", idade: "3 anos", especie: "Gato", genero: "Femea", descricao: "Gata muito carinhosa e brincalhona.", adotado: false, imagem: "https://placedog.net/300/200?id=10" },
-  { id: 2, nome: "Buddy", idade: "2 anos", especie: "Cão", genero: "Macho", descricao: "Cão brincalhão e leal.", adotado: false, imagem: "https://placedog.net/300/200?id=2" },
-  { id: 3, nome: "Bela", idade: "3 anos", especie: "Cão", genero: "Femea", descricao: "Calma e sociável com crianças.", adotado: false, imagem: "https://placedog.net/300/200?id=3" },
-];
+const AnunciosContext = createContext()
 
 export function AnunciosProvider({ children }) {
-  const [anuncios, setAnuncios] = useState(mockAnuncios);
+  const [anuncios, setAnuncios] = useState([])
+  const [loading, setLoading] = useState(true)
 
-  // axios.get("/api/anuncios").then(res => setAnuncios(res.data)) -- futuramente
+  useEffect(() => {
+    api.get('/animais')
+      .then(res => setAnuncios(res.data))
+      .catch(err => console.log('Erro ao buscar animais:', err))
+      .finally(() => setLoading(false))
+  }, [])
 
-  const atualizarAnuncio = (id, dadosAtualizados) => {
-    setAnuncios((prev) =>
-      prev.map((a) => (a.id === id ? { ...a, ...dadosAtualizados } : a))
-    );
-    // axios.put(`/api/anuncios/${id}`, dadosAtualizados) -- futuramente
-  };
+  const atualizarAnuncio = async (id, dadosAtualizados) => {
+    try {
+      const res = await api.put(`/animais/${id}`, dadosAtualizados)
+      setAnuncios(prev => prev.map(a => a.id === id ? res.data : a))
+      return res.data
+    } catch (err) {
+      console.log('Erro ao atualizar animal:', err)
+      throw err
+    }
+  }
 
-  const criarAnuncio = (novoAnuncio) => {
-    const novoId = Math.max(0, ...anuncios.map((a) => a.id)) + 1;
-    setAnuncios((prev) => [...prev, { ...novoAnuncio, id: novoId, adotado: false }]);
-    // axios.post("/api/anuncios", novoAnuncio) -- futuramente
-  };
+  const criarAnuncio = async (novoAnuncio) => {
+    try {
+      const res = await api.post('/animais', novoAnuncio)
+      setAnuncios(prev => [...prev, res.data])
+      return res.data
+    } catch (err) {
+      console.log('Erro ao criar animal:', err)
+      throw err
+    }
+  }
 
-  const eliminarAnuncio = (id) => {
-    setAnuncios((prev) => prev.filter((a) => a.id !== id));
-    // axios.delete(`/api/anuncios/${id}`) -- futuramente
-  };
+  const eliminarAnuncio = async (id) => {
+    try {
+      await api.delete(`/animais/${id}`)
+      setAnuncios(prev => prev.filter(a => a.id !== id))
+    } catch (err) {
+      console.log('Erro ao eliminar animal:', err)
+      throw err
+    }
+  }
 
-  const anunciosAtivos = anuncios.filter((a) => !a.adotado);
-  const adocoesConcluidas = anuncios.filter((a) => a.adotado);
+  const anunciosAtivos = anuncios.filter(a => a.disponivel_animal === true)
+  const adocoesConcluidas = anuncios.filter(a => a.disponivel_animal === false)
 
   return (
-    <AnunciosContext.Provider
-      value={{
-        anuncios,
-        anunciosAtivos,
-        adocoesConcluidas,
-        atualizarAnuncio,
-        criarAnuncio,
-        eliminarAnuncio,
-      }}
-    >
+    <AnunciosContext.Provider value={{
+      anuncios,
+      anunciosAtivos,
+      adocoesConcluidas,
+      atualizarAnuncio,
+      criarAnuncio,
+      eliminarAnuncio,
+      loading
+    }}>
       {children}
     </AnunciosContext.Provider>
-  );
+  )
 }
 
 export function useAnuncios() {
-  return useContext(AnunciosContext);
+  return useContext(AnunciosContext)
 }

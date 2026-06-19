@@ -3,12 +3,52 @@ import { useNavigate } from "react-router-dom";
 import { useAnuncios } from "../../context/AnunciosContext";
 import "./Adocoes.css";
 
+// Ícones de género em SVG inline (não dependem de nenhuma biblioteca externa)
+function IconeMacho({ size = 16 }) {
+  return (
+    <svg
+      width={size}
+      height={size}
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2.5"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    >
+      <circle cx="10" cy="14" r="6" />
+      <path d="M21 3l-7.5 7.5" />
+      <path d="M21 3h-6" />
+      <path d="M21 3v6" />
+    </svg>
+  );
+}
+
+function IconeFemea({ size = 16 }) {
+  return (
+    <svg
+      width={size}
+      height={size}
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2.5"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    >
+      <circle cx="12" cy="9" r="6" />
+      <path d="M12 15v7" />
+      <path d="M9 19h6" />
+    </svg>
+  );
+}
+
 const filtros = [
   { label: "Todos", value: "todos" },
-  { label: "Cães", value: "Cão" },
-  { label: "Gatos", value: "Gato" },
-  { label: "Fêmea", value: "Femea" },
-  { label: "Macho", value: "Macho" },
+  { label: "Cães", value: "cão" },
+  { label: "Gatos", value: "gato" },
+  { label: "Fêmea", value: "fêmea" },
+  { label: "Macho", value: "macho" },
 ];
 
 function Adocoes() {
@@ -19,8 +59,12 @@ function Adocoes() {
 
   const filtrados = adocoesConcluidas.filter((a) => {
     const correspondeFiltro =
-      filtroAtivo === "todos" || a.especie === filtroAtivo || a.genero === filtroAtivo;
-    const correspondeBusca = a.nome.toLowerCase().includes(search.toLowerCase());
+      filtroAtivo === "todos" ||
+      a.especie_animal === filtroAtivo ||
+      a.genero_animal === filtroAtivo;
+    const correspondeBusca = a.nome_animal
+      .toLowerCase()
+      .includes(search.toLowerCase());
     return correspondeFiltro && correspondeBusca;
   });
 
@@ -63,16 +107,42 @@ function Adocoes() {
               <th>Nome</th>
               <th>Idade</th>
               <th>Espécie</th>
+              <th>Género</th>
               <th></th>
             </tr>
           </thead>
           <tbody>
             {filtrados.map((a) => (
               <tr key={a.id}>
-                <td><img src={a.imagem} alt={a.nome} className="adoc-thumb" /></td>
-                <td className="fw-semibold">{a.nome}</td>
-                <td>{a.idade}</td>
-                <td>{a.especie}</td>
+                <td>
+                  <img
+                    src={a.fotografia_animal}
+                    alt={a.nome_animal}
+                    className="adoc-thumb"
+                  />
+                </td>
+                <td className="fw-semibold">{a.nome_animal}</td>
+                <td>
+                  {a.idade_indefinida_animal
+                    ? "Idade desconhecida"
+                    : `${a.idade_valor_animal} ${a.idade_unidade_animal}`}
+                </td>
+                <td>{a.especie_animal}</td>
+                <td>
+                  {a.genero_animal === "macho" ? (
+                    <span className="adoc-genero adoc-genero-macho">
+                      <IconeMacho size={16} />
+                      Macho
+                    </span>
+                  ) : a.genero_animal === "fêmea" ? (
+                    <span className="adoc-genero adoc-genero-femea">
+                      <IconeFemea size={16} />
+                      Fêmea
+                    </span>
+                  ) : (
+                    <span className="text-muted">—</span>
+                  )}
+                </td>
                 <td className="text-end">
                   <button
                     className="adoc-btn-ver-mais"
@@ -85,7 +155,7 @@ function Adocoes() {
             ))}
             {filtrados.length === 0 && (
               <tr>
-                <td colSpan={5} className="text-center text-muted py-4">
+                <td colSpan={6} className="text-center text-muted py-4">
                   Ainda não há adoções concluídas.
                 </td>
               </tr>

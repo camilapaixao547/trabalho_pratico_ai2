@@ -16,6 +16,7 @@ function Register() {
     setErro('')
     try {
       await api.post('/auth/register', { nome_cliente: nome, email_cliente: email, password_cliente: password })
+      navigate('/login')
     } catch (err) {
       setErro('Erro ao criar conta. Tenta novamente.')
     }

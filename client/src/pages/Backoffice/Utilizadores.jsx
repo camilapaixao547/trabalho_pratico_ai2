@@ -1,36 +1,29 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { useUtilizadores } from "../../context/UtilizadoresContext";
 import "./Utilizadores.css";
-
-const mockUtilizadores = [
-  { id: 1, nome: "Joana Abrantes", data: "18/06/2026", email: "joanaabrantes@gmail.com" },
-  { id: 2, nome: "Ricardo Henriques", data: "18/06/2026", email: "ricardohenriques@gmail.com" },
-  { id: 3, nome: "Carlos Cruz", data: "18/06/2026", email: "carloscruz@gmail.com" },
-];
 
 function Utilizadores() {
   const navigate = useNavigate();
-  const [utilizadores, setUtilizadores] = useState(mockUtilizadores);
+  const { utilizadores, loading, eliminarUtilizador } = useUtilizadores();
+
   const [search, setSearch] = useState("");
   const [utilizadorParaEliminar, setUtilizadorParaEliminar] = useState(null);
   const [mostrarSucesso, setMostrarSucesso] = useState(false);
 
   const filtrados = utilizadores.filter((u) =>
-    u.nome.toLowerCase().includes(search.toLowerCase())
+    u.nome_cliente?.toLowerCase().includes(search.toLowerCase()) ||
+    u.email_cliente?.toLowerCase().includes(search.toLowerCase())
   );
 
   const confirmarEliminar = (utilizador) => {
     setUtilizadorParaEliminar(utilizador);
   };
 
-  const eliminarUtilizador = () => {
-    // axios.delete(`/api/utilizadores/${utilizadorParaEliminar.id}`)
-    setUtilizadores((prev) =>
-      prev.filter((u) => u.id !== utilizadorParaEliminar.id)
-    );
+  const handleEliminar = async () => {
+    await eliminarUtilizador(utilizadorParaEliminar.id);
     setUtilizadorParaEliminar(null);
     setMostrarSucesso(true);
-
     setTimeout(() => setMostrarSucesso(false), 2500);
   };
 
@@ -45,7 +38,7 @@ function Utilizadores() {
             <input
               type="text"
               className="form-control util-search-input"
-              placeholder="Search"
+              placeholder="Pesquisar por nome ou email"
               value={search}
               onChange={(e) => setSearch(e.target.value)}
             />
@@ -62,53 +55,57 @@ function Utilizadores() {
           <thead>
             <tr>
               <th>Nome</th>
-              <th>Data</th>
               <th>Email</th>
+              <th>Data de registo</th>
               <th></th>
             </tr>
           </thead>
           <tbody>
-            {filtrados.map((u) => (
-              <tr key={u.id}>
-                <td>{u.nome}</td>
-                <td>{u.data}</td>
-                <td>{u.email}</td>
-                <td className="text-end">
-                  <button
-                    className="util-btn-editar me-2"
-                    onClick={() =>
-                      navigate(`/backoffice/utilizadores/editar/${u.id}`)
-                    }
-                  >
-                    Editar
-                  </button>
-                  <button
-                    className="util-btn-eliminar"
-                    onClick={() => confirmarEliminar(u)}
-                  >
-                    Eliminar
-                  </button>
+            {loading ? (
+              <tr>
+                <td colSpan={4} className="text-center text-muted py-4">
+                  A carregar...
                 </td>
               </tr>
-            ))}
-            {filtrados.length === 0 && (
+            ) : filtrados.length === 0 ? (
               <tr>
                 <td colSpan={4} className="text-center text-muted py-4">
                   Nenhum utilizador encontrado.
                 </td>
               </tr>
+            ) : (
+              filtrados.map((u) => (
+                <tr key={u.id}>
+                  <td>{u.nome_cliente}</td>
+                  <td>{u.email_cliente}</td>
+                  <td>{u.createdAt ? new Date(u.createdAt).toLocaleDateString("pt-PT") : "—"}</td>
+                  <td className="text-end">
+                    <button
+                      className="util-btn-editar me-2"
+                      onClick={() => navigate(`/backoffice/utilizadores/editar/${u.id}`)}
+                    >
+                      Editar
+                    </button>
+                    <button
+                      className="util-btn-eliminar"
+                      onClick={() => confirmarEliminar(u)}
+                    >
+                      Eliminar
+                    </button>
+                  </td>
+                </tr>
+              ))
             )}
           </tbody>
         </table>
       </div>
 
-      {/* MODAL CONFIRMAR ELIMINAÇÃO */}
       {utilizadorParaEliminar && (
         <div className="util-modal-backdrop">
           <div className="util-modal">
             <p className="util-modal-text">
               Tem a certeza que deseja eliminar{" "}
-              <strong>{utilizadorParaEliminar.nome}</strong>?
+              <strong>{utilizadorParaEliminar.nome_cliente}</strong>?
             </p>
             <div className="d-flex justify-content-center gap-2 mt-4">
               <button
@@ -117,7 +114,7 @@ function Utilizadores() {
               >
                 Cancelar
               </button>
-              <button className="util-btn-confirmar" onClick={eliminarUtilizador}>
+              <button className="util-btn-confirmar" onClick={handleEliminar}>
                 Eliminar
               </button>
             </div>
@@ -125,7 +122,6 @@ function Utilizadores() {
         </div>
       )}
 
-      {/* TOAST DE SUCESSO */}
       {mostrarSucesso && (
         <div className="util-toast">Eliminado com sucesso!</div>
       )}

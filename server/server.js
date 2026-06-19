@@ -2,17 +2,37 @@ require('dotenv').config()
 
 const express = require('express')
 const cors = require('cors')
+const fs = require('fs')
 const sequelize = require('./config/database')
 const User = require('./models/User')
+const Animal = require('./models/Animal')
+const Formulario = require('./models/Formulario')
+const Favorito = require('./models/Favorito')
 const authRoutes = require('./routes/authRoutes')
+const animalRoutes = require('./routes/animalRoutes')
+const formularioRoutes = require('./routes/formularioRoutes')
+const userRoutes = require('./routes/userRoutes')
+const favoritoRoutes = require('./routes/favoritoRoutes')
+const uploadRoutes = require('./routes/uploadRoutes')
 
 const app = express()
+
+// Cria a pasta uploads se não existir
+if (!fs.existsSync('uploads')) fs.mkdirSync('uploads')
 
 app.use(cors())
 app.use(express.json())
 
+// Ficheiros estáticos
+app.use('/uploads', express.static('uploads'))
+
 // Rotas
-app.use('/auth', authRoutes)
+app.use('/api/auth', authRoutes)
+app.use('/api/animais', animalRoutes)
+app.use('/api/formularios', formularioRoutes)
+app.use('/api/users', userRoutes)
+app.use('/api/favoritos', favoritoRoutes)
+app.use('/api/upload', uploadRoutes)
 
 // Liga à base de dados e inicia o servidor
 sequelize.authenticate()

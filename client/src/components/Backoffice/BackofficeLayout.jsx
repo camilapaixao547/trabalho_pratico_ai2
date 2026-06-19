@@ -1,11 +1,12 @@
-import { Outlet, NavLink } from "react-router-dom";
+import { Outlet, NavLink, useNavigate } from "react-router-dom";
 import {
   HouseDoorFill,
   PeopleFill,
   Files,
   FileText,
   Heart,
-} from "react-bootstrap-icons"; // ou usa Tabler Icons se preferires
+} from "react-bootstrap-icons";
+import { LogOut } from "lucide-react";
 import "./BackofficeLayout.css";
 
 const menuItems = [
@@ -17,9 +18,16 @@ const menuItems = [
 ];
 
 function BackofficeLayout() {
+  const navigate = useNavigate();
+
+  const handleSair = () => {
+    localStorage.clear();
+    sessionStorage.clear();
+    navigate("/");
+  };
+
   return (
     <div className="d-flex bo-wrapper">
-      {/* SIDEBAR - fixa, nunca remonta */}
       <aside className="bo-sidebar">
         <div className="bo-logo">
           <span className="bo-logo-text">Pantureco</span>
@@ -42,11 +50,9 @@ function BackofficeLayout() {
         </nav>
       </aside>
 
-      {/* ÁREA PRINCIPAL */}
       <div className="bo-main flex-grow-1">
-        {/* NAVBAR - fixa, nunca remonta */}
         <header className="bo-header d-flex justify-content-between align-items-center px-4">
-          <div /> {/* espaço à esquerda, vazio neste design */}
+          <div />
           <div className="d-flex align-items-center gap-3">
             <div className="bo-search">
               <i className="bi bi-search bo-search-icon" />
@@ -57,10 +63,16 @@ function BackofficeLayout() {
               />
             </div>
             <div className="bo-avatar">A</div>
+            <button
+              onClick={handleSair}
+              title="Sair"
+              style={{ background: "none", border: "none", cursor: "pointer", color: "#555", padding: 0 }}
+            >
+              <LogOut size={22} />
+            </button>
           </div>
         </header>
 
-        {/* CONTEÚDO - só isto troca entre páginas */}
         <main className="bo-content">
           <Outlet />
         </main>
