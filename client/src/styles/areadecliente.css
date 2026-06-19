@@ -12,7 +12,11 @@
   font-weight: 600;
   transition: opacity 0.3s ease;
 }
-.btn-gradient:hover { opacity: 0.85; color: #fff; }
+
+.btn-gradient:hover {
+  opacity: 0.85;
+  color: #fff;
+}
 
 .btn-outline-pantureco {
   background: #fff;
@@ -23,7 +27,11 @@
   font-weight: 600;
   transition: all 0.3s ease;
 }
-.btn-outline-pantureco:hover { background: var(--color-green); color: #fff; }
+
+.btn-outline-pantureco:hover {
+  background: var(--color-green);
+  color: #fff;
+}
 
 .btn-outline-danger-pill {
   background: #fff;
@@ -33,7 +41,11 @@
   padding: 8px 20px;
   font-weight: 600;
 }
-.btn-outline-danger-pill:hover { background: #d9534f; color: #fff; }
+
+.btn-outline-danger-pill:hover {
+  background: #d9534f;
+  color: #fff;
+}
 
 .filter-pill {
   background: #fff;
@@ -44,19 +56,25 @@
   font-weight: 600;
   font-size: 0.9rem;
 }
-.filter-pill.active { background: var(--color-green); color: #fff; }
+
+.filter-pill.active {
+  background: var(--color-green);
+  color: #fff;
+}
 
 .badge-dark-pill {
-  background: rgba(0, 0, 0, 0.55);
-  color: #fff;
+  background: rgba(227, 241, 223);
+  color: #2CBA81;
   border-radius: 50px;
   padding: 4px 12px;
   font-size: 0.8rem;
   font-weight: 600;
 }
+
 .badge-light-pill {
-  background: rgba(255, 255, 255, 0.85);
-  color: var(--color-dark);
+  background: rgba(227, 241, 223);
+  color: #2CBA81;
+  ;
   border-radius: 50px;
   padding: 4px 12px;
   font-size: 0.8rem;
@@ -80,4 +98,13 @@
   border: none;
   border-radius: 16px;
   box-shadow: 0 4px 14px rgba(0, 0, 0, 0.06);
+}
+
+.text-gradient {
+  background: linear-gradient(90deg, var(--color-green), var(--color-gold));
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  text-fill-color: transparent;
+  display: inline-block;
 }

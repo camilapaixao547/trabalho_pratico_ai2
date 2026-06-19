@@ -31,6 +31,8 @@ import FormularioVisualizar from './pages/Backoffice/FormularioVisualizar';
 import Adocoes from './pages/Backoffice/Adocoes'
 import AdocaoDetalhe from './pages/Backoffice/AdocaoDetalhe'
 
+import './styles/areadecliente.css'
+
 const CLIENT_ROUTES = ['/area-cliente', '/perfil', '/formularios-adocao']
 
 function App() {

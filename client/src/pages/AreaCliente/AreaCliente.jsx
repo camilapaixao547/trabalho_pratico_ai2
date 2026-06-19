@@ -28,6 +28,7 @@ function AreaCliente() {
         <div className="container">
           <h1 className="fw-bold mb-0">Bem-vindo,</h1>
           <h1 className="fw-bold text-gradient">Sónia Santos</h1>
+
         </div>
       </div>
 
@@ -35,7 +36,7 @@ function AreaCliente() {
         <h2 className="text-center fw-bold mb-4">Animais disponíveis para adopção</h2>
 
         <FilterPills
-          options={['Todos', 'Cães', 'Gatos', 'Femêa', 'Macho']}
+          options={['Todos', 'Cães', 'Gatos', 'Fêmea', 'Macho']}
           active={filter}
           onChange={setFilter}
         />
