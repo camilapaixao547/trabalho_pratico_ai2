@@ -35,14 +35,16 @@ const CLIENT_ROUTES = ['/area-cliente', '/perfil', '/formularios-adocao']
 
 function App() {
   const location = useLocation()
+
   const isClientArea = CLIENT_ROUTES.some(route =>
     location.pathname.startsWith(route)
   )
   const isBackoffice = location.pathname.startsWith('/backoffice')
+  const isAuthPage = location.pathname === '/login' || location.pathname === '/register'
 
   return (
     <>
-      {!isBackoffice && (isClientArea ? <ClientNavbar /> : <Navbar />)}
+      {!isBackoffice && !isAuthPage && (isClientArea ? <ClientNavbar /> : <Navbar />)}
 
       <Routes>
         <Route path="/" element={<Home />} />

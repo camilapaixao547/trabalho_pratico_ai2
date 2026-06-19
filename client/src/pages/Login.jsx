@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
-import loginImg from '../assets/images/hero.jpg'
+import heroLogin from '../assets/images/hero_login2.png'
+import logoBranco from '../assets/images/logo_pantureco_branco.png'
 import api from '../api/axios'
 
 function Login() {
@@ -12,12 +13,6 @@ function Login() {
   const handleSubmit = async (e) => {
     e.preventDefault()
     setErro('')
-    // 🔓 LOGIN FALSO PARA DESENVOLVIMENTO (DESATIVA O LOGIN REAL)
-    localStorage.setItem('token', 'fake-token')
-    localStorage.setItem('perfil', 'admin') // ou 'cliente'
-    navigate('/backoffice') // ou '/area-cliente'
-    return
-    /*
     try {
       const resposta = await api.post('/auth/login', { email_cliente: email, password_cliente: password })
       localStorage.setItem('token', resposta.data.token)
@@ -29,16 +24,18 @@ function Login() {
       }
     } catch (err) {
       setErro('Email ou password incorretos.')
-    }*/
+    }
   }
 
   return (
     <div className="auth-page">
-      <div className="auth-image-col">
-        <img src={loginImg} alt="Animais" className="auth-image" />
-      </div>
-
+      <img src={heroLogin} alt="Background" className="auth-bg" />
+      <div className="auth-overlay" />
       <div className="auth-form-col">
+        <Link to="/" className="auth-logo-link">
+          <img src={logoBranco} alt="Logo" className="auth-logo" />
+        </Link>
+
         <div className="auth-form-inner">
           <h1 className="auth-title">Login</h1>
 

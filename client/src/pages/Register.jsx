@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
-import loginImg from '../assets/images/hero.jpg'
+import heroLogin from '../assets/images/hero_login2.png'
+import logoBranco from '../assets/images/logo_pantureco_branco.png'
 import api from '../api/axios'
 
 function Register() {
@@ -22,11 +23,14 @@ function Register() {
 
   return (
     <div className="auth-page">
-      <div className="auth-image-col">
-        <img src={loginImg} alt="Animais" className="auth-image" />
-      </div>
+      <img src={heroLogin} alt="Background" className="auth-bg" />
+      <div className="auth-overlay" />
 
       <div className="auth-form-col">
+        <Link to="/" className="auth-logo-link">
+          <img src={logoBranco} alt="Logo" className="auth-logo" />
+        </Link>
+
         <div className="auth-form-inner">
           <h1 className="auth-title">Criar Conta</h1>
 
