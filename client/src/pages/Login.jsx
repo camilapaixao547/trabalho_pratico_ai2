@@ -12,6 +12,12 @@ function Login() {
   const handleSubmit = async (e) => {
     e.preventDefault()
     setErro('')
+    // 🔓 LOGIN FALSO PARA DESENVOLVIMENTO (DESATIVA O LOGIN REAL)
+    localStorage.setItem('token', 'fake-token')
+    localStorage.setItem('perfil', 'admin') // ou 'cliente'
+    navigate('/backoffice') // ou '/area-cliente'
+    return
+    /*
     try {
       const resposta = await api.post('/auth/login', { email_cliente: email, password_cliente: password })
       localStorage.setItem('token', resposta.data.token)
@@ -23,7 +29,7 @@ function Login() {
       }
     } catch (err) {
       setErro('Email ou password incorretos.')
-    }
+    }*/
   }
 
   return (

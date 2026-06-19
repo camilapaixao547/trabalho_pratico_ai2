@@ -1,0 +1,122 @@
+.afor-wrapper {
+  padding-bottom: 40px;
+}
+
+.afor-title {
+  font-weight: 800;
+  margin-bottom: 24px;
+}
+
+.afor-panel {
+  background-color: #fff;
+  border-radius: 12px;
+  padding: 24px;
+}
+
+.afor-section-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-weight: 600;
+  padding-bottom: 14px;
+  border-bottom: 1px solid #eee;
+  margin-bottom: 20px;
+}
+
+.afor-section-header i {
+  color: #2ecc71;
+  font-size: 1.1rem;
+}
+
+.afor-avatar-wrapper {
+  position: relative;
+  width: 120px;
+}
+
+.afor-avatar {
+  width: 120px;
+  height: 120px;
+  border-radius: 12px;
+  background-color: #d6f5e3;
+  color: #2ecc71;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.afor-paw-icon {
+  font-size: 2.2rem;
+}
+
+.afor-avatar-edit {
+  position: absolute;
+  bottom: -6px;
+  right: -6px;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #2ecc71, #d9b35c);
+  color: #fff;
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.8rem;
+}
+
+.afor-label {
+  font-weight: 600;
+  margin-bottom: 6px;
+  display: block;
+}
+
+.afor-radio-label {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-weight: 500;
+  cursor: pointer;
+}
+
+.afor-radio {
+  width: 18px;
+  height: 18px;
+  accent-color: #2ecc71;
+}
+
+.afor-error {
+  color: #c0392b;
+  font-size: 0.85rem;
+  margin-top: 4px;
+}
+
+.afor-checkbox {
+  width: 18px;
+  height: 18px;
+  accent-color: #2ecc71;
+}
+
+.afor-checkbox-label {
+  color: #2ecc71;
+  font-weight: 600;
+  margin-left: 6px;
+}
+
+.afor-btn-cancelar {
+  background: #fff;
+  border: 1px solid #2ecc71;
+  color: #2ecc71;
+  border-radius: 20px;
+  padding: 8px 28px;
+  font-weight: 500;
+}
+
+.afor-btn-guardar {
+  background: linear-gradient(90deg, #6fcf97, #d9b35c);
+  color: #fff;
+  border: none;
+  border-radius: 20px;
+  padding: 8px 28px;
+  font-weight: 500;
+}

@@ -1,0 +1,87 @@
+.uform-wrapper {
+  padding-bottom: 40px;
+}
+
+.uform-title {
+  font-weight: 800;
+  margin-bottom: 24px;
+}
+
+.uform-panel {
+  background-color: #fff;
+  border-radius: 12px;
+  padding: 24px;
+}
+
+.uform-section-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-weight: 600;
+  padding-bottom: 14px;
+  border-bottom: 1px solid #eee;
+  margin-bottom: 20px;
+}
+
+.uform-section-header i {
+  color: #2ecc71;
+  font-size: 1.1rem;
+}
+
+.uform-avatar-wrapper {
+  position: relative;
+  width: 120px;
+}
+
+.uform-avatar {
+  width: 120px;
+  height: 120px;
+  border-radius: 12px;
+  background-color: #d6f5e3;
+  color: #2ecc71;
+  font-size: 2.5rem;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.uform-avatar-edit {
+  position: absolute;
+  bottom: -6px;
+  right: -6px;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #2ecc71, #d9b35c);
+  color: #fff;
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.8rem;
+}
+
+.uform-label {
+  font-weight: 600;
+  margin-bottom: 6px;
+  display: block;
+}
+
+.uform-btn-cancelar {
+  background: #fff;
+  border: 1px solid #2ecc71;
+  color: #2ecc71;
+  border-radius: 20px;
+  padding: 8px 28px;
+  font-weight: 500;
+}
+
+.uform-btn-guardar {
+  background: linear-gradient(90deg, #6fcf97, #d9b35c);
+  color: #fff;
+  border: none;
+  border-radius: 20px;
+  padding: 8px 28px;
+  font-weight: 500;
+}

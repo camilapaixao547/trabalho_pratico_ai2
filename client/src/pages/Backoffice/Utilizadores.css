@@ -1,0 +1,138 @@
+.util-wrapper {
+  padding-bottom: 40px;
+}
+
+.util-title {
+  font-weight: 800;
+  margin-bottom: 24px;
+}
+
+.util-panel {
+  background-color: #fff;
+  border-radius: 12px;
+  padding: 24px;
+}
+
+.util-search {
+  position: relative;
+}
+
+.util-search-input {
+  padding-left: 36px;
+  border-radius: 8px;
+  border: 1px solid #ddd;
+}
+
+.util-search-icon {
+  position: absolute;
+  left: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #999;
+}
+
+.util-btn-primary {
+  background-color: #2ecc71;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  padding: 8px 18px;
+  font-weight: 500;
+  white-space: nowrap;
+}
+
+.util-table thead th {
+  color: #999;
+  font-weight: 500;
+  font-size: 0.85rem;
+  border-bottom: 1px solid #eee;
+  padding-bottom: 10px;
+}
+
+.util-table tbody td {
+  padding: 14px 8px;
+  vertical-align: middle;
+  border-bottom: 1px solid #f5f5f5;
+  font-size: 0.92rem;
+}
+
+.util-btn-editar {
+  background-color: #fdf0d5;
+  color: #c08a1e;
+  border: none;
+  border-radius: 6px;
+  padding: 4px 14px;
+  font-size: 0.85rem;
+  font-weight: 500;
+}
+
+.util-btn-eliminar {
+  background-color: #fde3e3;
+  color: #c0392b;
+  border: none;
+  border-radius: 6px;
+  padding: 4px 14px;
+  font-size: 0.85rem;
+  font-weight: 500;
+}
+
+/* MODAL */
+.util-modal-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.4);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+.util-modal {
+  background: #fff;
+  border-radius: 12px;
+  padding: 32px;
+  max-width: 400px;
+  text-align: center;
+}
+
+.util-modal-text {
+  font-size: 1rem;
+  margin: 0;
+}
+
+.util-btn-cancelar {
+  background: #fff;
+  border: 1px solid #2ecc71;
+  color: #2ecc71;
+  border-radius: 20px;
+  padding: 6px 24px;
+  font-weight: 500;
+}
+
+.util-btn-confirmar {
+  background-color: #c0392b;
+  color: #fff;
+  border: none;
+  border-radius: 20px;
+  padding: 6px 24px;
+  font-weight: 500;
+}
+
+/* TOAST */
+.util-toast {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  background-color: #2ecc71;
+  color: #fff;
+  padding: 12px 24px;
+  border-radius: 8px;
+  font-weight: 500;
+  z-index: 1100;
+  animation: fadein 0.3s ease;
+}
+
+@keyframes fadein {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
