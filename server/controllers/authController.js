@@ -46,6 +46,7 @@ const login = async (req, res) => {
         res.json({ token, perfil: user.perfil, nome: user.nome_cliente })
 
     } catch (err) {
+        console.log('ERRO LOGIN:', err)
         res.status(500).json({ erro: 'Erro ao fazer login.' })
     }
 }
