@@ -2,13 +2,14 @@ import { Link, useNavigate } from 'react-router-dom'
 import { LogOut } from 'lucide-react'
 import logo from '../../assets/images/logoPantureco.png'
 
-function ClientNavbar({ userName = 'Sónia Santos' }) {
+function ClientNavbar() {
   const navigate = useNavigate()
   const userName = localStorage.getItem('nome') || 'U'
   const initial = userName.charAt(0).toUpperCase()
 
   const handleSair = () => {
-    localStorage.removeItem('token')
+    localStorage.clear()
+    sessionStorage.clear()
     navigate('/')
   }
 
