@@ -4,6 +4,7 @@ import logo from '../../assets/images/logoPantureco.png'
 
 function ClientNavbar({ userName = 'Sónia Santos' }) {
   const navigate = useNavigate()
+  const userName = localStorage.getItem('nome') || 'U'
   const initial = userName.charAt(0).toUpperCase()
 
   const handleSair = () => {

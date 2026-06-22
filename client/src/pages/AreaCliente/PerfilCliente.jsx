@@ -88,7 +88,6 @@ function Perfil() {
 
   return (
     <>
-      <ClientNavbar />
 
       <div className="bg-cream py-4">
         <div className="container">
