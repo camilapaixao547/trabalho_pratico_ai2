@@ -1,5 +1,5 @@
 import { createContext, useContext, useState, useEffect } from "react";
-import axios from "axios";
+import api from '../api/api'
 
 const FormulariosContext = createContext();
 
@@ -7,11 +7,9 @@ export function FormulariosProvider({ children }) {
   const [formularios, setFormularios] = useState([]);
   const [loading, setLoading] = useState(true);
 
-  // Buscar todos os formulários (com Animal e User incluídos)
   useEffect(() => {
-    axios.get("/api/formularios")
+    api.get("/formularios")
       .then((res) => {
-        // protege contra respostas inesperadas da API
         const data = Array.isArray(res.data) ? res.data : res.data.formularios ?? [];
         setFormularios(data);
       })
@@ -20,27 +18,27 @@ export function FormulariosProvider({ children }) {
   }, []);
 
   const criarFormulario = async (dados) => {
-    const res = await axios.post("/api/formularios", dados);
+    const res = await api.post("/formularios", dados);
     setFormularios((prev) => [res.data, ...prev]);
     return res.data;
   };
 
   const marcarComoVisto = async (id) => {
-    await axios.patch(`/api/formularios/${id}/lido`);
+    await api.patch(`/formularios/${id}/lido`);
     setFormularios((prev) =>
       prev.map((f) => (f.id_formulario === id ? { ...f, formulario_lido: true } : f))
     );
   };
 
   const atualizarFormulario = async (id, dados) => {
-    await axios.put(`/api/formularios/${id}`, dados);
+    await api.put(`/formularios/${id}`, dados);
     setFormularios((prev) =>
       prev.map((f) => (f.id_formulario === id ? { ...f, ...dados } : f))
     );
   };
 
   const eliminarFormulario = async (id) => {
-    await axios.delete(`/api/formularios/${id}`);
+    await api.delete(`/formularios/${id}`);
     setFormularios((prev) => prev.filter((f) => f.id_formulario !== id));
   };
 

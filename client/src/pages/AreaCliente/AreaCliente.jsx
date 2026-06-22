@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react'
-import axios from 'axios'
+import api from '../../api/api'
 import FilterPills from '../../components/FilterPills'
 import AnimalCard from '../../components/AnimalCard'
 
@@ -9,7 +9,7 @@ function AreaCliente() {
   const [filter, setFilter] = useState('Todos')
 
   useEffect(() => {
-    axios.get('http://localhost:5000/api/animais')
+    api.get('/animais')
       .then(res => setAnimals(res.data))
       .catch(err => console.error('Erro ao carregar animais:', err))
   }, [])

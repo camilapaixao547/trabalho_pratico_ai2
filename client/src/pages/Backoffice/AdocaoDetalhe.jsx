@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { useFormularios } from "../../context/FormulariosContext";
-import api from "../../api/axios";
+import api from "../../api/api";
 import "./AnuncioForm.css";
 
 function AdocaoDetalhe() {

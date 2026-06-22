@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import ClientNavbar from '../../components/CompAreaCliente/ClientNavbar'
-import api from '../../api/axios'
+import api from '../../api/api'
 
 function MeusFormularios() {
   const [formularios, setFormularios] = useState([])

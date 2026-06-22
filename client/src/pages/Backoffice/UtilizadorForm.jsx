@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { useUtilizadores } from "../../context/UtilizadoresContext";
-import api from "../../api/axios";
+import api from "../../api/api";
 import "./UtilizadorForm.css";
 
 const distritos = [

@@ -1,7 +1,7 @@
 import { useState, useEffect, useRef } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { useAnuncios } from "../../context/AnunciosContext";
-import api from "../../api/axios";
+import api from "../../api/api";
 import "./AnuncioForm.css";
 
 const initialState = {

@@ -2,7 +2,7 @@ import { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import heroLogin from '../assets/images/hero_login2.png'
 import logoBranco from '../assets/images/logo_pantureco_branco.png'
-import api from '../api/axios'
+import api from '../api/api'
 
 function Register() {
   const [nome, setNome] = useState('')
