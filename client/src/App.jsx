@@ -8,6 +8,7 @@ import Register from './pages/Register'
 import AreaCliente from './pages/AreaCliente/AreaCliente'
 import Perfil from './pages/AreaCliente/PerfilCliente'
 import FormularioAdocao from './pages/AreaCliente/FormularioAdocao'
+import MeusFormularios from './pages/AreaCliente/MeusFormularios'
 
 import { AnunciosProvider } from "./context/AnunciosContext";
 import { UtilizadoresProvider } from "./context/UtilizadoresContext";
@@ -19,21 +20,18 @@ import Dashboard from './pages/Backoffice/Dashboard'
 import Utilizadores from "./pages/Backoffice/Utilizadores";
 import UtilizadorForm from "./pages/Backoffice/UtilizadorForm";
 import UtilizadorVisualizar from "./pages/Backoffice/UtilizadorVisualizar";
-
 import Anuncios from "./pages/Backoffice/Anuncios";
 import AnuncioForm from "./pages/Backoffice/AnuncioForm";
-
 import FormulariosPage from './pages/Backoffice/FormulariosPage';
 import FormularioCriarPage from './pages/Backoffice/FormularioCriarPage';
 import FormularioEditarPage from './pages/Backoffice/FormularioEditarPage';
 import FormularioVisualizar from './pages/Backoffice/FormularioVisualizar';
-
 import Adocoes from './pages/Backoffice/Adocoes'
 import AdocaoDetalhe from './pages/Backoffice/AdocaoDetalhe'
 
 import './styles/areadecliente.css'
 
-const CLIENT_ROUTES = ['/area-cliente', '/perfil', '/formularios-adocao']
+const CLIENT_ROUTES = ['/area-cliente', '/perfil', '/formulario-adocao', '/meus-formularios']
 
 function App() {
   const location = useLocation()
@@ -60,8 +58,11 @@ function App() {
         <Route path="/perfil" element={
           <RotaProtegida perfil="cliente"><Perfil /></RotaProtegida>
         } />
-        <Route path="/formularios-adocao" element={
+        <Route path="/formulario-adocao/:id" element={
           <RotaProtegida perfil="cliente"><FormularioAdocao /></RotaProtegida>
+        } />
+        <Route path="/meus-formularios" element={
+          <RotaProtegida perfil="cliente"><MeusFormularios /></RotaProtegida>
         } />
 
         {/* Rotas de admin */}
